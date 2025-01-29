@@ -128,6 +128,18 @@ ros2 run module_name node.py
 Other ROS commands (like `ros launch`) will work too.
 You can manage the source code for all_seaing_vehicle in `dev_ws/src/all_seaing_vehicle`.
 
+### Note on reproducibility
+
+It is important to note that to achieve true reproducibility, you will want to clear the development shell of system packages.
+You can do that like so:
+
+```
+nix develop -i
+```
+
+While not recommended for ordinary development, you should absolutely use this in production to realize the full benefits of Nix.
+Build times may be significantly longer as system caches may not be automatically used.
+
 ## Development
 
 For those interested in contributing to this repository (that is, the build repository for `all_seaing_vehicle`), note that there is a secondary development shell `dev` that can be launched like so:
