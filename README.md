@@ -1,4 +1,4 @@
-# arcturus_nix
+# Arcturus Nix :shipit:
 
 The easiest way to get started with development on all_seaing_vehicle with native performance, powered by the Nix package manager
 
@@ -79,7 +79,7 @@ Generated with [GitDiagram](https://gitdiagram.com/arcturusnavigation/arcturus_n
 
 Run the following in a Bash shell on a Linux-based system to build individual Python nodes (simulations and nodes requiring YOLO models will not work).
 Use this if you want to be on the bleeding edge of development, build code fast and cut through bloat, and get a taste of [NixOS god complex](https://www.reddit.com/r/NixOS/comments/kauf1m/dealing_with_post_nixflake_god_complex/).
-Note full reproducibility is not guaranteed (yet), but this environment is still quite reproducible and dependency specifications and environment setup is much clearer and easier to change in Nix than in a Docker container.
+Full reproducibility is [theoretically guaranteed](https://github.com/ArcturusNavigation/fish-n-ships), and dependency specifications, environment setup, and the like are much clearer and easier to change in Nix than in a Docker container.
 
 Do not use this if you don't like Linux, hate Nix, don't like cutting edge technology, and don't want to be part of the software revolution.
 You can [run from Nix](https://github.com/ArcturusNavigation/arcturus_docker), but [you can't hide](https://www.reddit.com/r/Nix/comments/19a2vqq/anyone_else_replacing_docker_compose_with_nix/).
@@ -95,16 +95,8 @@ chmod +x ./install.sh
 ./install.sh
 ```
 
-If you are on a resource-constrained system, you can use the following commands instead:
-
-```bash
-git clone https://github.com/ArcturusNavigation/arcturus_nix --depth 1
-cd arcturus_nix/tiny
-nix develop
-cd ..
-chmod +x ./install.sh
-./install.sh
-```
+If you are on a resource-constrained system, suffer in silence while your computer attempts to build the entirety of the Arcturus ROS codebase and its dependencies from source—this may take a while.
+Work is currently underway to automate this using a locally-hosted build server, but in the meantime enjoy the [Gentoo user experience](https://wiki.gentoo.org/wiki/Why_build_from_sources).
 
 3. The last line of the install script should tell you how to run your first node. It should be (note the period):
 
@@ -127,22 +119,26 @@ nix flake update
 nix develop
 ```
 
-If you are on a resource-constrained system, you can use the following commands instead:
-
-```bash
-git pull
-cd tiny
-nix develop
-cd ..
-```
-
 6. In general, after completing steps 1-2, you can run a module for the first time (since entering a devshell) using the command in step 3 and later with:
 
 ```bash
 ros2 run module_name node.py
 ```
 
+Other ROS commands (like `ros launch`) will work too.
 You can manage the source code for all_seaing_vehicle in `dev_ws/src/all_seaing_vehicle`.
+
+## Development
+
+For those interested in contributing to this repository (that is, the build repository for `all_seaing_vehicle`), note that there is a secondary development shell `dev` that can be launched like so:
+
+```sh
+nix develop .#dev
+```
+
+This features pre-commit hooks with automatic formatting, among other things.
+We also have a `.envrc` file to enable this shell automatically with [direnv](https://direnv.net/).
+This is *not* the shell you should be using for building `all_seaing_vehicle` (that is `default`).
 
 ## FAQs
 
@@ -150,11 +146,6 @@ You can manage the source code for all_seaing_vehicle in `dev_ws/src/all_seaing_
 
 [File an issue](https://github.com/ArcturusNavigation/arcturus_nix/issues/new) as soon as possible so we can fix it.
 In the meantime, you can downgrade to the [Docker container](https://github.com/ArcturusNavigation/arcturus_docker), but the issues should be resolved very soon.
-
-### Isn't Nix supposed to be perfectly reproducible? Why doesn't it work on my machine?
-
-Note that this repository is still quite janky because the build process runs in a devshell, a non-reproducible development environment which simply ensures you have the right versions of certain packages (but not that you have all the packages you need or that your configuration/environment settings are correct).
-As of right now, the most reproducible setup might still be to use the Docker container, though work is already underway to migrate from devshells to a Nix package setup, which will ensure perfect reproducibility without the virtualization overhead of Docker.
 
 ### Why should I use this instead of the Docker container?
 
@@ -173,15 +164,6 @@ Neither is Gazebo (VRX) simulation supported.
 Both of these are planned for the future, but omitted for now due to excess bloat that would cause an unsustainable influx of jank in the Nix build process at this stage in its development.
 All nodes should have their dependencies specified, but if a node that isn't listed as unsupported does not build, please [file an issue](https://github.com/ArcturusNavigation/arcturus_nix/issues/new).
 
-### Why is this jank? (alternatively, how jank is it?)
-
-This is jank because it does not follow the Nix philosophy of purely functional (and therefore provable) reproducibility.
-Due to the maze of commands and environment variables that need to be set for ROS to build the codebase, it was easiest to setup a Nix environment using devshells (which aren't reproducible but still use Nix packages).
-This allows fast iteration and easy testing (so we can add support for more tools with Nix).
-We are already working on porting this to a Nix package for pure reproducibility, at which point this repository will surpass [arcturus_docker](https://github.com/ArcturusNavigation/arcturus_docker) in terms of reproducibility and mathematical elegance.
-Also, the install script currently clones repositories into an ignored folder, which is highly jank and should be replaced by a git submodule, but due to lack of familiarity with the git dark arts, this will take some time to change.
-Nevertheless, it will definitely be completed before (or at the same time as) we migrate to a Nix package.
-
 ### Is it any good?
 
-[Yes, indeed](https://news.ycombinator.com/item?id=3067434).
+[Yes, very](https://news.ycombinator.com/item?id=3067434).
