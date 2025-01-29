@@ -87,9 +87,73 @@
             )
           ];
         };
+
+        packages = {
+          install = pkgs.stdenv.mkDerivation {
+            pname = "install";
+            version = "1.0";
+
+            src = ./.;
+
+            nativeBuildInputs = [
+              pkgs.makeWrapper
+            ];
+
+            buildInputs = [
+              pkgs.bash
+            ];
+
+            propagatedBuildInputs = [
+              # basic development tasks
+              pkgs.git
+              pkgs.bash
+              pkgs.cmake
+
+              # ros build tools
+              pkgs.colcon
+              ros2nix.packages.${pkgs.system}.ros2nix
+
+              # cmake
+              (
+                with pkgs.rosPackages.humble;
+                buildEnv {
+                  paths = [
+                    ros-core
+                    ament-package
+                    ament-cmake-core
+                    diagnostic-updater
+                    geographic-msgs
+                    message-filters
+                    tf2-geometry-msgs
+                    yaml-cpp-vendor
+                    python-cmake-module
+                    tf2-sensor-msgs
+                    mavros-msgs
+                    rosbag2-py
+                  ];
+                }
+              )
+            ];
+
+            dontUseCmakeConfigure = true;
+
+            buildPhase = ''
+              mkdir -p $out/bin
+              cp install.sh $out/bin/install
+              chmod +x $out/bin/install
+            '';
+
+            installPhase = ''
+              wrapProgram $out/bin/install \
+                --set PATH "${ros2nix.packages.${pkgs.system}.ros2nix}/bin:${pkgs.colcon}/bin:${pkgs.rosPackages.humble.ament-package}/bin:${pkgs.rosPackages.humble.python-cmake-module}:$PATH"
+            '';
+          };
+        };
+
         formatter = pkgs.nixfmt-rfc-style;
       }
     );
+
   nixConfig = {
     extra-substituters = [ "https://ros.cachix.org" ];
     extra-trusted-public-keys = [ "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo=" ];
