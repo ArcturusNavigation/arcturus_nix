@@ -195,7 +195,7 @@ Remember to substitute `hash1` and `hash2` with the corresponding versions from 
 Everything from step 3 onwards can now be applied and your environment will update accordingly.
 It is important you do not make changes to the environment so your working tree stays clean.
 If you are debugging an error, you should also run the same sequence of commands in the same order to reproduce it.
-If the error still cannot be reproduced, enter the devshell with `nix develop -i` instead of `nix develop` (see below).
+If the error still cannot be reproduced, enter the devshell with `nix develop -i` instead of `nix develop` (see below for more options).
 
 ### Reproducibility in Production
 
@@ -203,19 +203,31 @@ It is important to note that to achieve true reproducibility, you will want to c
 You can do that like so:
 
 ```bash
+nix develop -i --keep HOME
+```
+
+The astute among you may notice that this is technically not completely reproducible (rather, it is reproducible *up to* your home directory, which generally does not include any programs, so this is good enough for our purposes) since it includes your home directory.
+This is to prevent you from reproducibility hell, where ROS is unable to access logs stored on your system and your shell breaks down.
+If you insist on full reproducibility (up to this repository and `all_seaing_vehicle` only) and are willing to accept these issues, you can run:
+
+```bash
 nix develop -i
 ```
 
-While not recommended for ordinary development, you should absolutely use this in production to realize the full benefits of Nix.
+Note that some launch files will not work due to requiring access to ROS logs stored in a folder under your home directory.
+Such is the jank of ROS.
+Thus, we cannot recommend this even in production, but we can work on increasing reproducibility by limiting the directories that are kept to only the ones absolutely required by ROS if necessary.
 You can launch specific nodes in `all_seaing_bringup` with:
 
 ```bash
-./launch.sh node.py
+# for `node.launch.py`:
+./launch.sh node
 # or (aliased to):
-launch node.py
+launch node
 ```
 
 This will automatically spawn the reproducible devshell and run `ros2 launch` under the hood.
+Specifying no arguments will launch the default Nix testing file.
 
 ### Other commands
 
