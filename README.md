@@ -1,3 +1,10 @@
+<!-- markdownlint-configure-file
+{
+  "line-length": false,
+  "ol-prefix": false
+}
+-->
+
 # Arcturus Nix :shipit:
 
 The easiest way to get started with development on all_seaing_vehicle with native performance, powered by the Nix package manager
