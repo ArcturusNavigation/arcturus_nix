@@ -8,8 +8,8 @@ git rev-parse HEAD
 
 DIR="dev_ws/src/all_seaing_vehicle"
 if [ ! -d "$DIR" ]; then
-    echo -e "\e[1m\e[0;31mError: Directory '$DIR' does not exist.\e[0;31m\e[0m" >&2
-    exit 1
+	echo -e "\e[1m\e[0;31mError: Directory '$DIR' does not exist.\e[0;31m\e[0m" >&2
+	exit 1
 fi
 
 cd dev_ws/src/all_seaing_vehicle

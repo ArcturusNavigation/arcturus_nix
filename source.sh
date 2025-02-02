@@ -9,7 +9,7 @@ main() {
 	))
 	for dir in "${dirs[@]}"; do
 		path="install/${dir}/share/${dir}/local_setup.bash"
-		if [[ -f "$path" ]]; then
+		if [[ -f $path ]]; then
 			source $path
 		fi
 	done
@@ -18,7 +18,7 @@ main() {
 }
 
 # show help and exit
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+if [[ $1 == "-h" || $1 == "--help" ]]; then
 	echo -e "\e[1mUsage\e[0m: . ./source.sh [-h]"
 	echo -e "\e[1mNote\e[0m: You can run nodes within a module with \`ros2 run module_name node.py\` after using this script."
 	echo -e "\e[1mImportant\e[0m: Use a period (.) before the script name so that environment changes occur in your current shell session."
