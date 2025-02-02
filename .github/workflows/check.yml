@@ -1,0 +1,16 @@
+name: check-flake
+on:
+  workflow_dispatch: # allows manual triggering
+  push:
+  pull_request:
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - name: Check flake.nix
+        run: nix flake check
