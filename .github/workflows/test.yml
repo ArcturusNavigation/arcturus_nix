@@ -19,4 +19,4 @@ jobs:
       - name: Perform health checks on flake.nix
         uses: DeterminateSystems/flake-checker-action@main
       - name: Launch Nix development environment and run basic tests
-        run: nix develop -i --keep HOME --command bash -c "chmod +x *.sh; install; run all_seaing_driver onshore_node.py; hash;"
+        run: nix develop -i --accept-flake-config --keep HOME --command bash -c "chmod +x *.sh; install; run all_seaing_driver onshore_node.py; hash;"
