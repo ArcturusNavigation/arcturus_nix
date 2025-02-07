@@ -1,3 +1,5 @@
+#!/usr/bin/env -S nix develop --command bash
+
 # $ nix develop
 # <devshell> $ ./pull.sh <all_seaing_vehicle git ref>
 

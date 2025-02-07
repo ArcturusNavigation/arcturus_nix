@@ -3,7 +3,6 @@ on:
   workflow_dispatch: # allows manual triggering
   push:
   pull_request:
-
 jobs:
   flake:
     runs-on: ubuntu-latest
