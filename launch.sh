@@ -1,3 +1,5 @@
+#!/usr/bin/env -S nix develop --command bash
+
 # ./launch.sh <launch file>
 
 # This script does not need to be run from a devshell since it will spawn its own fully reproducible devshell.

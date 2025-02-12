@@ -1,3 +1,5 @@
+#!/usr/bin/env -S nix develop --command bash
+
 # $ nix develop
 # <devshell> $ ./install.sh
 
