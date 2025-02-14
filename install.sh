@@ -9,5 +9,5 @@
 # Dependencies will intentionally not be updated to ensure reproducibility.
 
 chmod +x *.sh
-./pull.sh
-./build.sh
+bash ./pull.sh
+bash ./build.sh
