@@ -175,7 +175,13 @@
       }
     );
   nixConfig = {
-    extra-substituters = [ "https://ros.cachix.org" ];
-    extra-trusted-public-keys = [ "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo=" ];
+    extra-substituters = [
+      "https://arcturus-nix.cachix.org"
+      "https://ros.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "arcturus-nix.cachix.org-1:m5WpNu6Gdf/B3yIF/8x8ASrrErINc71usI9YcqsisY0="
+      "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
+    ];
   };
 }
