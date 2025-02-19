@@ -1,0 +1,21 @@
+name: cache-flake
+on:
+  workflow_dispatch: # allows manual triggering
+  push:
+    branches: [main]
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - name: Set up CI binary cache
+        uses: DeterminateSystems/flakehub-cache-action@main
+      - name: Push shell environment to Cachix
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX }}
+        run: |
+          nix develop --accept-flake-config --profile default -c true
+          cachix push arcturus-nix default
