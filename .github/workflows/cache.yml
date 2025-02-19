@@ -1,9 +1,7 @@
-name: build-flake
+name: cache-flake
 on:
   workflow_dispatch: # allows manual triggering
   push:
-    branches: [main]
-  pull_request:
     branches: [main]
 jobs:
   cache:
@@ -15,7 +13,9 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
       - name: Set up CI binary cache
         uses: DeterminateSystems/flakehub-cache-action@main
-      - name: Perform health checks on flake.nix
-        uses: DeterminateSystems/flake-checker-action@main
-      - name: Launch Nix development environment and run basic tests
-        run: nix develop -i --accept-flake-config --keep HOME --command bash -c "chmod +x *.sh; bash ./install.sh; bash ./source.sh; bash ./hash.sh;"
+      - name: Push shell environment to Cachix
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX }}
+        run: |
+          nix develop --accept-flake-config --profile default -c true
+          cachix push arcturus-nix default
