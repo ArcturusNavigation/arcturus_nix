@@ -18,4 +18,4 @@ jobs:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX }}
         run: |
           nix develop --accept-flake-config --profile default -c true
-          nix run nixpkgs#cachix -- push arcturus-nix default
+          nix shell nixpkgs#cachix --command bash -c "cachix authtoken ${{ env.CACHIX_AUTH_TOKEN }}; cachix push arcturus-nix default"
