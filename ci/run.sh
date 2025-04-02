@@ -8,7 +8,7 @@ main() {
 	echo -e "\e[1mBuilding module with Nix (see result/ for artifacts).\e[0m"
 	nixName=$(echo "$1" | tr '_' '-')
 	echo "$nixName"
-	nix-build -A rosPackages.humble.$nixName
+	nix build -f default.nix rosPackages.humble.$nixName
 	echo "Done building module with Nix."
 
 	# source manifests
