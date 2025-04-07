@@ -1,4 +1,5 @@
 #!/usr/bin/env -S nix develop --command bash
+set -e
 
 # $ nix develop
 # <devshell> $ ./build.sh
