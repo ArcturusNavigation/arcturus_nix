@@ -22,4 +22,4 @@ jobs:
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX }}
         run: |
-          nix develop --accept-flake-config --profile default -c true | cachix push arcturus-nix
+          nix develop --accept-flake-config --profile default -c true
