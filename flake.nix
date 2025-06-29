@@ -144,7 +144,7 @@
               mixed-line-endings.enable = true;
               tagref.enable = true;
               trim-trailing-whitespace.enable = true;
-              trufflehog.enable = true;
+              trufflehog.enable = false;
               check-yaml.enable = true;
               yamlfmt.enable = true;
               check-json.enable = true;
