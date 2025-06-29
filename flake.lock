@@ -203,11 +203,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1742649964,
-        "narHash": "sha256-DwOTp7nvfi8mRfuL1escHDXabVXFGT1VlPD1JHrtrco=",
+        "lastModified": 1750779888,
+        "narHash": "sha256-wibppH3g/E2lxU43ZQHC5yA/7kIKLGxVEnsnVK1BtRg=",
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
-        "rev": "dcf5072734cb576d2b0c59b2ac44f5050b5eac82",
+        "rev": "16ec914f6fb6f599ce988427d9d94efddf25fe6d",
         "type": "github"
       },
       "original": {
@@ -236,11 +236,11 @@
         "rosdistro": "rosdistro"
       },
       "locked": {
-        "lastModified": 1743165136,
-        "narHash": "sha256-JgVEBIErUAd/jYmvtne29bpQvkirlkPwIJZeV6HBKo8=",
+        "lastModified": 1751123337,
+        "narHash": "sha256-eqroJMeh75UMjys9gwU4N+Ve4v51s6SWZTpPw8yFw6o=",
         "owner": "wentasah",
         "repo": "ros2nix",
-        "rev": "c8720baec6143972c8556df7b0a09f705dd08787",
+        "rev": "6556ed30d59c7b196088f646ddc1a0c22823d407",
         "type": "github"
       },
       "original": {
@@ -252,11 +252,11 @@
     "rosdistro": {
       "flake": false,
       "locked": {
-        "lastModified": 1743162708,
-        "narHash": "sha256-y3wH0C7Elzwfb6OxSwysZwkMBzdiLlnmw9+mldWd6zM=",
+        "lastModified": 1748630238,
+        "narHash": "sha256-qTCxQ8Rvrmrz0s1J0e6AZKtxC7fu+uwridNEscj7yZI=",
         "owner": "ros",
         "repo": "rosdistro",
-        "rev": "10cb92acc4de87e16237143554b230ebac1f73e6",
+        "rev": "0c431c180b0773ba7e60f0378e5d88fdeab6b4ef",
         "type": "github"
       },
       "original": {
